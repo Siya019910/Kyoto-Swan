@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body { background: #000; }
+
+  .banner-root {
+    width: 100%;
+    height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    font-family: 'Courier New', monospace;
+    /* Dark background with a slight blue tint for tech depth */
+    background: radial-gradient(circle, #0d1117 0%, #000000 100%);
+  }
+
+  /* --- THE LARGE LOGO --- */
+  .logo-bg-layer {
+    position: absolute;
+    /* Maximize size */
+    width: 90%; 
+    height: 90%;
+    /* Replace with your actual file name */
+    background: url('your-logo.jpg') no-repeat center center;
+    background-size: contain; 
+    opacity: 0.5; /* High visibility */
+    z-index: 1;
+    /* Makes the JPG colors pop against the dark tech background */
+    filter: saturate(1.2) brightness(1.1);
+    animation: gentle-float 10s ease-in-out infinite;
+  }
+
+  @keyframes gentle-float {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-10px) scale(1.02); }
+  }
+
+  /* --- GRID & SCANLINES --- */
+  .grid-overlay {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(135,206,235,0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(135,206,235,0.1) 1px, transparent 1px);
+    background-size: 60px 60px;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  /* --- SLIDING TICKER SECTION --- */
+  .content-wrap {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+  }
+
+  .ticker-outer {
+    width: 100%;
+    overflow: hidden;
+    /* Semi-transparent black so the Large Logo is visible through the bar */
+    background: rgba(0, 0, 0, 0.75); 
+    border-top: 2px solid #87CEEB;
+    border-bottom: 2px solid #FFA500;
+    padding: 25px 0;
+    backdrop-filter: blur(4px); /* Modern tech blur effect */
+  }
+
+  .ticker-track {
+    display: flex;
+    width: max-content;
+    animation: ticker-move 10s linear infinite;
+  }
+
+  .ticker-item {
+    display: flex;
+    gap: 40px;
+    padding-right: 80px;
+    font-size: clamp(32px, 8vw, 50px); /* Larger text to match large logo */
+    font-weight: 900;
+    letter-spacing: -1px;
+  }
+
+  @keyframes ticker-move {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .t-blue { color: #87CEEB; text-shadow: 0 0 15px rgba(135,206,235,0.8); }
+  .t-orange { color: #FFA500; text-shadow: 0 0 15px rgba(255,165,0,0.8); }
+
+  /* --- LOWER DATA STRIP --- */
+  .data-footer {
+    position: absolute;
+    bottom: 30px;
+    display: flex;
+    gap: 20px;
+    z-index: 10;
+  }
+
+  .data-chip {
+    font-size: 12px;
+    color: #87CEEB;
+    border: 1px solid rgba(135,206,235,0.5);
+    padding: 5px 15px;
+    background: rgba(0,0,0,0.8);
+    letter-spacing: 2px;
+  }
+</style>
+</head>
+<body>
+
+<div class="banner-root">
+  <div class="grid-overlay"></div>
+  
+  <!-- THE LARGE LOGO -->
+  <div class="logo-bg-layer"></div>
+
+  <div class="content-wrap">
+    <div class="ticker-outer">
+      <div class="ticker-track">
+        <div class="ticker-item">
+          <span class="t-blue">System.init()</span>
+          <span class="t-orange">>>>></span>
+          <span class="t-blue">Executing_Code...</span>
+          <span class="t-orange">[1010101]</span>
+        </div>
+        <!-- Duplicate for loop -->
+        <div class="ticker-item">
+          <span class="t-blue">System.init()</span>
+          <span class="t-orange">>>>></span>
+          <span class="t-blue">Executing_Code...</span>
+          <span class="t-orange">[1010101]</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="data-footer">
+    <span class="data-chip">SIZE: MAX_LARGE</span>
+    <span class="data-chip">LAYER: BACKGROUND</span>
+    <span class="data-chip">SIGNAL: CLEAR</span>
+  </div>
+</div>
+
+</body>
+</html>

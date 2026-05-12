@@ -1,0 +1,211 @@
+/* 
+    KYOTO SWAN - FULL DESIGN SYSTEM 
+    Features: Smooth 6s Background Slider, Glassmorphism, Purple/Silver Theme
+*/
+
+:root {
+    --purple: #6a0dad;
+    --purple-glow: #a349e5;
+    --silver: #c0c0c0;
+    --white: #ffffff;
+    --black: #050505;
+    --glass: rgba(0, 0, 0, 0.65); /* Balanced for legibility */
+    --footer-silver: #C0C0C0;
+}
+
+* { 
+    box-sizing: border-box; 
+    -webkit-font-smoothing: antialiased; 
+}
+
+body {
+    background-color: var(--black);
+    color: var(--white);
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    margin: 0;
+    font-weight: bold;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+.cursive { 
+    font-family: 'Brush Script MT', cursive; 
+    font-weight: normal; 
+}
+
+/* --- SMOOTH BACKGROUND SLIDER (6s per image) --- */
+.background-slider {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-color: var(--black);
+}
+
+.background-slider::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: none; /* No dark overlay */
+    animation: smoothSlide 18s infinite ease-in-out;
+}
+
+@keyframes smoothSlide {
+    /* Image 1: 0s - 6s */
+    0%, 20% { 
+        background-image: url('bg1.jpg'); 
+        opacity: 1;
+    }
+    /* Transition 1 to 2 */
+    25% { opacity: 0.3; } 
+    
+    /* Image 2: 6s - 12s */
+    30%, 53% { 
+        background-image: url('bg2.jpg'); 
+        opacity: 1;
+    }
+    /* Transition 2 to 3 */
+    58% { opacity: 0.3; }
+
+    /* Image 3: 12s - 18s */
+    63%, 86% { 
+        background-image: url('bg3.jpg'); 
+        opacity: 1;
+    }
+    /* Fade out back to 1 */
+    91% { opacity: 0.3; }
+    96%, 100% { 
+        background-image: url('bg1.jpg'); 
+        opacity: 1;
+    }
+}
+
+/* --- NAVIGATION --- */
+nav {
+    background: rgba(5, 5, 5, 0.85);
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid var(--purple);
+    padding: 15px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+nav a {
+    color: var(--silver);
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 1.5px;
+    transition: 0.3s;
+}
+
+nav a:hover { 
+    color: var(--purple-glow);
+    text-shadow: 0 0 8px var(--purple-glow);
+}
+
+/* --- HEADER & LOGO --- */
+header { 
+    text-align: center; 
+    padding: 40px 10px; 
+}
+
+.logo-small { 
+    width: 90px; 
+    filter: drop-shadow(0 0 8px var(--purple)); 
+    margin-bottom: 10px;
+}
+
+.tagline {
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    color: var(--silver);
+}
+
+/* --- CONTAINERS & GLASS CARDS --- */
+.container { 
+    max-width: 900px; 
+    margin: auto; 
+    padding: 20px; 
+    flex: 1; 
+}
+
+.glass-card {
+    background: var(--glass);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    padding: 35px;
+    margin-bottom: 25px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+}
+
+h1, h2, h3 {
+    margin-top: 0;
+    letter-spacing: 1px;
+}
+
+.price-tag { 
+    color: var(--purple-glow); 
+    float: right; 
+    font-weight: 900;
+}
+
+/* --- BUTTONS --- */
+.btn-wa {
+    background: linear-gradient(135deg, #25d366, #128c7e);
+    color: white;
+    padding: 18px;
+    display: block;
+    text-align: center;
+    border-radius: 12px;
+    text-decoration: none;
+    margin-top: 15px;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.btn-wa:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4);
+}
+
+/* --- FOOTER --- */
+footer {
+    background: var(--footer-silver);
+    color: var(--black);
+    padding: 40px 20px;
+    text-align: center;
+    margin-top: 50px;
+    border-top: 2px solid var(--purple);
+}
+
+footer p {
+    margin: 8px 0;
+    font-size: 0.9rem;
+}
+
+/* RESPONSIVE FIXES */
+@media (max-width: 600px) {
+    nav { gap: 10px; padding: 10px; }
+    nav a { font-size: 0.7rem; }
+    .glass-card { padding: 20px; }
+    .price-tag { float: none; display: block; margin-top: 5px; }
+}
