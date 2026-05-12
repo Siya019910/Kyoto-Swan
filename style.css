@@ -1,6 +1,6 @@
 /* 
     KYOTO SWAN - FULL DESIGN SYSTEM 
-    Features: Smooth 6s Background Slider, Glassmorphism, Purple/Silver Theme
+    Optimized for: Mobile responsiveness & No-Slide Navigation
 */
 
 :root {
@@ -9,13 +9,18 @@
     --silver: #c0c0c0;
     --white: #ffffff;
     --black: #050505;
-    --glass: rgba(0, 0, 0, 0.65); /* Balanced for legibility */
+    --glass: rgba(0, 0, 0, 0.65);
     --footer-silver: #C0C0C0;
 }
 
 * { 
     box-sizing: border-box; 
     -webkit-font-smoothing: antialiased; 
+}
+
+html, body {
+    width: 100%;
+    overflow-x: hidden; /* Prevents horizontal sliding */
 }
 
 body {
@@ -27,7 +32,6 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    overflow-x: hidden;
 }
 
 .cursive { 
@@ -35,7 +39,7 @@ body {
     font-weight: normal; 
 }
 
-/* --- SMOOTH BACKGROUND SLIDER (6s per image) --- */
+/* --- BACKGROUND SLIDER --- */
 .background-slider {
     position: fixed;
     top: 0;
@@ -56,61 +60,42 @@ body {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    filter: none; /* No dark overlay */
     animation: smoothSlide 18s infinite ease-in-out;
 }
 
 @keyframes smoothSlide {
-    /* Image 1: 0s - 6s */
-    0%, 20% { 
-        background-image: url('bg1.jpg'); 
-        opacity: 1;
-    }
-    /* Transition 1 to 2 */
+    0%, 20% { background-image: url('bg1.jpg'); opacity: 1; }
     25% { opacity: 0.3; } 
-    
-    /* Image 2: 6s - 12s */
-    30%, 53% { 
-        background-image: url('bg2.jpg'); 
-        opacity: 1;
-    }
-    /* Transition 2 to 3 */
+    30%, 53% { background-image: url('bg2.jpg'); opacity: 1; }
     58% { opacity: 0.3; }
-
-    /* Image 3: 12s - 18s */
-    63%, 86% { 
-        background-image: url('bg3.jpg'); 
-        opacity: 1;
-    }
-    /* Fade out back to 1 */
+    63%, 86% { background-image: url('bg3.jpg'); opacity: 1; }
     91% { opacity: 0.3; }
-    96%, 100% { 
-        background-image: url('bg1.jpg'); 
-        opacity: 1;
-    }
+    96%, 100% { background-image: url('bg1.jpg'); opacity: 1; }
 }
 
-/* --- NAVIGATION --- */
+/* --- NAVIGATION (Straight & Responsive) --- */
 nav {
-    background: rgba(5, 5, 5, 0.85);
+    background: rgba(5, 5, 5, 0.9);
     backdrop-filter: blur(15px);
     border-bottom: 1px solid var(--purple);
-    padding: 15px;
+    padding: 12px 5px;
     position: sticky;
     top: 0;
     z-index: 1000;
     display: flex;
     justify-content: center;
-    flex-wrap: wrap;
-    gap: 20px;
+    align-items: center;
+    width: 100%;
 }
 
 nav a {
     color: var(--silver);
     text-decoration: none;
-    font-size: 0.85rem;
-    letter-spacing: 1.5px;
+    font-size: 0.75rem; /* Balanced for mobile */
+    letter-spacing: 1px;
     transition: 0.3s;
+    padding: 5px 8px;
+    white-space: nowrap; /* Keeps text straight */
 }
 
 nav a:hover { 
@@ -118,29 +103,32 @@ nav a:hover {
     text-shadow: 0 0 8px var(--purple-glow);
 }
 
-/* --- HEADER & LOGO --- */
+/* --- HEADER --- */
 header { 
     text-align: center; 
-    padding: 40px 10px; 
+    padding: 30px 10px 10px; 
 }
 
 .logo-small { 
-    width: 90px; 
+    width: 80px; 
     filter: drop-shadow(0 0 8px var(--purple)); 
     margin-bottom: 10px;
 }
 
 .tagline {
-    font-size: 0.7rem;
-    letter-spacing: 3px;
+    font-size: 0.65rem;
+    letter-spacing: 2px;
     color: var(--silver);
+    margin: 5px auto;
+    max-width: 90%;
 }
 
-/* --- CONTAINERS & GLASS CARDS --- */
+/* --- CONTAINERS --- */
 .container { 
+    width: 100%;
     max-width: 900px; 
-    margin: auto; 
-    padding: 20px; 
+    margin: 0 auto; 
+    padding: 15px; 
     flex: 1; 
 }
 
@@ -148,64 +136,55 @@ header {
     background: var(--glass);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 20px;
-    padding: 35px;
-    margin-bottom: 25px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
-}
-
-h1, h2, h3 {
-    margin-top: 0;
-    letter-spacing: 1px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 20px;
+    width: 100%;
 }
 
 .price-tag { 
     color: var(--purple-glow); 
-    float: right; 
     font-weight: 900;
+    display: block;
 }
 
 /* --- BUTTONS --- */
 .btn-wa {
     background: linear-gradient(135deg, #25d366, #128c7e);
     color: white;
-    padding: 18px;
+    padding: 15px;
     display: block;
     text-align: center;
-    border-radius: 12px;
+    border-radius: 10px;
     text-decoration: none;
     margin-top: 15px;
-    font-size: 1rem;
-    letter-spacing: 1px;
-    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    font-weight: bold;
     border: none;
 }
 
-.btn-wa:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4);
-}
-
-/* --- FOOTER --- */
+/* --- SLIM FOOTER --- */
 footer {
     background: var(--footer-silver);
     color: var(--black);
-    padding: 40px 20px;
+    padding: 15px 10px; /* Reduced padding */
     text-align: center;
-    margin-top: 50px;
+    margin-top: 30px;
     border-top: 2px solid var(--purple);
+    width: 100%;
 }
 
 footer p {
-    margin: 8px 0;
-    font-size: 0.9rem;
+    margin: 2px 0; /* Tight spacing */
+    font-size: 0.8rem;
 }
 
-/* RESPONSIVE FIXES */
-@media (max-width: 600px) {
-    nav { gap: 10px; padding: 10px; }
-    nav a { font-size: 0.7rem; }
+/* MOBILE FIXES */
+@media (max-width: 480px) {
+    nav { gap: 2px; }
+    nav a { font-size: 0.65rem; padding: 5px 4px; }
     .glass-card { padding: 20px; }
-    .price-tag { float: none; display: block; margin-top: 5px; }
+    h1 { font-size: 1.8rem; }
+    h2 { font-size: 1.5rem; }
 }
